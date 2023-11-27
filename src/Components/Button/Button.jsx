@@ -1,16 +1,17 @@
 import React from 'react';
-import { styled } from '@mui/material/styles';
+import { alpha, styled } from '@mui/material/styles';
+import MuiButton from '@mui/material/Button';
 
-const StyledButton = styled('button')(({ theme }) => ({
+const StyledButton = styled(MuiButton)(({ theme, props }) => ({
+  ...props,
   border: '1px solid white',
-  backgroundColor: 'white',
-  width: ' 80px',
-  padding: ' 9px 10px',
+  backgroundColor: theme.palette.text.primary,
+  padding: '15px 20px',
   marginRight: '10px',
-  color: ' #1675de',
+  fontSize: '1.2em',
   fontWeight: 600,
-  fontSize: '15px',
   cursor: 'pointer',
+
   [theme.breakpoints.down('sm')]: {
     padding: '7px',
     marginRight: '7px',
@@ -18,7 +19,7 @@ const StyledButton = styled('button')(({ theme }) => ({
     width: '70px',
   },
   '&:hover': {
-    color: 'white',
+    color: theme.palette.primary.contrastText,
     backgroundColor: 'transparent',
   },
   '&.bigBtn': {
@@ -29,7 +30,7 @@ const StyledButton = styled('button')(({ theme }) => ({
       width: '125px',
     },
     '&:hover': {
-      backgroundColor: '#00000061',
+      backgroundColor: alpha(theme.palette.background.paper, 0.2),
     },
   },
 }));

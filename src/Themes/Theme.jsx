@@ -141,6 +141,7 @@ export const themeSettings = (mode) => {
             },
             background: {
               default: colors.primary[500],
+              paper: colors.blueAccent[100],
             },
           }
         : {

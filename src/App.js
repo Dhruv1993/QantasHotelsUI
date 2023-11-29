@@ -127,6 +127,7 @@ function App() {
                     container
                     spacing={{ xs: 2, md: 6 }}
                     columns={{ xs: 1, sm: 8, md: 12 }}
+                    rowGap={'50px'}
                   >
                     {data &&
                       data.map((hotel, index) => (

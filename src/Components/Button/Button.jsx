@@ -5,8 +5,8 @@ import MuiButton from '@mui/material/Button';
 const StyledButton = styled(MuiButton)(({ theme, props }) => ({
   ...props,
   border: '1px solid white',
-  backgroundColor: theme.palette.text.primary,
-  padding: '15px 20px',
+  backgroundColor: theme.palette.background.paper,
+  padding: '10px 20px',
   marginRight: '10px',
   fontSize: '1.2em',
   fontWeight: 600,
@@ -16,7 +16,7 @@ const StyledButton = styled(MuiButton)(({ theme, props }) => ({
     padding: '7px',
     marginRight: '7px',
     fontSize: '13px',
-    width: '70px',
+    // width: '70px',
   },
   '&:hover': {
     color: theme.palette.primary.contrastText,

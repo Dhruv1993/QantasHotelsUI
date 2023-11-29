@@ -114,7 +114,7 @@ export const uiColors = (mode) => ({
           600: '#868dfb',
           700: '#a4a9fc',
           800: '#c3c6fd',
-          900: '#e1e2fe',
+          900: '#00224f',
         },
       }),
 });
@@ -129,7 +129,7 @@ export const themeSettings = (mode) => {
         ? {
             // palette values for dark mode
             primary: {
-              main: colors.primary[500],
+              main: colors.primary[100],
             },
             secondary: {
               main: colors.greenAccent[500],
@@ -150,7 +150,7 @@ export const themeSettings = (mode) => {
               main: colors.primary[100],
             },
             secondary: {
-              main: colors.greenAccent[500],
+              main: colors.blueAccent[900],
             },
             neutral: {
               dark: colors.grey[700],
@@ -159,6 +159,7 @@ export const themeSettings = (mode) => {
             },
             background: {
               default: '#fcfcfc',
+              paper: '#FFFFFF',
             },
           }),
     },
@@ -209,7 +210,7 @@ export const ColorModeContext = createContext({
 });
 
 export const useMode = () => {
-  const [mode, setMode] = useState('dark');
+  const [mode, setMode] = useState('light');
 
   const colorMode = useMemo(
     () => ({

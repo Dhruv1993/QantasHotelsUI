@@ -75,7 +75,7 @@ const ImageContainer = styled('div')(({ theme }) => ({
       position: 'absolute',
       top: '2vmin',
       left: '-10vmin',
-      width: '100%',
+      width: '105%',
       opacity: '0.7',
       borderRadius: '0.2em',
       boxShadow: '2px 2px 34px -6px rgba(0, 0, 0, 0.66)',
@@ -94,14 +94,14 @@ const Card = ({ hotel }) => {
       <Col>
         <Box display={'flex'}>
           <TextLeft>
-            <h1 class="text-black">{hotel.name}</h1>
+            <h1 className="text-black">{hotel.name}</h1>
             <span>
               {hotel.location.city},{hotel.location.country}
             </span>
             <Line></Line>
             <OfferContainer display={'flex'}>
-              {hotel.inclusions.map((offer) => (
-                <OfferInfo>{offer}</OfferInfo>
+              {hotel.inclusions.map((offer, index) => (
+                <OfferInfo key={index}>{offer}</OfferInfo>
               ))}
             </OfferContainer>
           </TextLeft>

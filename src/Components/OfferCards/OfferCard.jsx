@@ -124,8 +124,8 @@ const Offers = () => {
         <p>Promotions, deals and special offers for you</p>
 
         <CardContainer>
-          {offerData.map((offer) => (
-            <Card>
+          {offerData.map((offer, index) => (
+            <Card key={index}>
               <img src={offer.img} alt="flight" />
               <TextContainer>
                 <h2>{offer.title}</h2>

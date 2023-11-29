@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CssBaseline, Grid, ThemeProvider } from '@mui/material';
+import { CssBaseline, Grid, ThemeProvider, Pagination } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { ColorModeContext, useMode } from './Themes/Theme';
 import Header from './Components/Header/Header';
@@ -55,14 +55,20 @@ const Wrapper = styled('div')(({ theme }) => ({
 }));
 
 const HotelContainer = styled('div')(({ theme }) => ({
+  marginBottom: '2em',
   flex: 4,
   [theme.breakpoints.down('md')]: {
     flex: 1,
   },
 }));
+const PaginationContainer = styled('div')(({ theme }) => ({
+  display: 'flex',
+  width: '100%',
+  justifyContent: 'center',
+}));
 
 const Main = styled('div')(({ theme }) => ({
-  marginBottom: '10em',
+  marginBottom: '5em',
   [theme.breakpoints.down('sm')]: {
     margin: '1em',
   },
@@ -75,6 +81,12 @@ const Main = styled('div')(({ theme }) => ({
 function App() {
   const [theme, colorMode] = useMode();
   const [data, setData] = React.useState([]);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const recordsPerPage = 5;
+  const lastIndex = currentPage * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
+  const records = data.slice(firstIndex, lastIndex);
+  const nPage = Math.ceil(data.length / recordsPerPage);
 
   React.useEffect(() => {
     // The AbortController interface represents a controller object that allows you to abort one or
@@ -95,6 +107,10 @@ function App() {
       controller.abort();
     };
   }, []);
+
+  const paginationChanged = (_, page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -129,8 +145,8 @@ function App() {
                     columns={{ xs: 1, sm: 8, md: 12 }}
                     rowGap={'50px'}
                   >
-                    {data &&
-                      data.map((hotel, index) => (
+                    {records &&
+                      records.map((hotel, index) => (
                         <Grid
                           item
                           xs={1}
@@ -144,6 +160,16 @@ function App() {
                       ))}
                   </Grid>
                 </Main>
+                <PaginationContainer>
+                  <Pagination
+                    count={nPage} // total no of items per page
+                    page={currentPage}
+                    onChange={paginationChanged}
+                    variant="outlined"
+                    shape="rounded"
+                    size="large"
+                  />
+                </PaginationContainer>
               </HotelContainer>
             </Wrapper>
           </MiddleSection>

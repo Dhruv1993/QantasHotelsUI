@@ -52,7 +52,7 @@ const Header = () => {
           loop
           playsInline
         >
-          <source src="/videos/sunsetsm.mp4" type="video/mp4" />
+          <source src="/videos/hotel.mp4" type="video/mp4" />
         </HeroContainer>
         <Wrapper>
           <NavBar />

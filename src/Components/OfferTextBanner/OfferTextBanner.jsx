@@ -9,6 +9,10 @@ const OfferTextBannerStyled = styled('div')(({ theme }) => ({
   marginTop: '50px',
   padding: '20px 10px',
   textAlign: 'center',
+  display: 'flex',
+  height: '60vh',
+  flexDirection: 'column',
+  justifyContent: 'center',
   [theme.breakpoints.down('lg')]: {
     marginTop: '5px',
     padding: '10px',
@@ -16,9 +20,11 @@ const OfferTextBannerStyled = styled('div')(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     marginTop: '0px',
     padding: '2px',
+    height: '18vh',
   },
   '& > h2': {
     fontSize: '30px',
+    color: theme.palette.primary.contrastText,
     [theme.breakpoints.down('md')]: {
       fontSize: '22px',
     },
@@ -33,12 +39,13 @@ const OfferTextBannerStyled = styled('div')(({ theme }) => ({
   '& > h1': {
     fontSize: '65px',
     margin: '0px 0px 20px',
+    color: theme.palette.primary.contrastText,
     [theme.breakpoints.down('lg')]: {
       margin: '0px 0px 15px',
       fontSize: '55px',
     },
     [theme.breakpoints.down('md')]: {
-      fontSize: '32px',
+      fontSize: '20px',
       margin: '0px 0px 5px',
     },
     [theme.breakpoints.down('xs')]: {

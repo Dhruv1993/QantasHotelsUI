@@ -35,6 +35,10 @@ const StyledButton = styled(MuiButton)(({ theme, props }) => ({
   },
 }));
 
-export const Button = ({ text, ...rest }) => {
-  return <StyledButton {...rest}>{text}</StyledButton>;
+export const Button = ({ text, icon: Icon, ...rest }) => {
+  return (
+    <StyledButton {...rest}>
+      {text} {Icon ? <Icon /> : null}
+    </StyledButton>
+  );
 };

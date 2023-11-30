@@ -4,17 +4,14 @@ import { LOGO_CSS } from '../../Constants/CssConstants';
 import { Link } from 'react-router-dom';
 import { Button } from '../Button/Button';
 import {
-  AirportShuttleOutlined,
   AttractionsOutlined,
   BedOutlined,
   ConnectingAirportsOutlined,
   CurrencyExchangeOutlined,
-  DirectionsCarOutlined,
   HelpOutlineOutlined,
   HotelOutlined,
   HowToRegOutlined,
   LoginOutlined,
-  LogoutOutlined,
   NightShelterOutlined,
   SearchOutlined,
   TranslateOutlined,

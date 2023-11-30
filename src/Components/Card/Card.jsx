@@ -1,6 +1,10 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
+import { NavigateNextOutlined, Star } from '@mui/icons-material';
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
+import { Button } from '../Button/Button';
 
 const Col = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -20,15 +24,15 @@ const Col = styled('div')(({ theme }) => ({
 const TextLeft = styled('div')(({ theme }) => ({
   position: 'relative',
   boxShadow: '2px 2px 34px -6px rgba(0, 0, 0, 0.66)',
-  width: '450px',
+  width: '400px',
   overflowY: 'auto',
-  padding: '100px 50px',
+  padding: '50px 50px',
   textAlign: 'left',
   borderRadius: '3px',
   background: 'white',
   opacity: 0.7,
   zIndex: 10,
-  maxHeight: '350px',
+  height: '450px',
   display: 'flex',
   flexDirection: 'column',
   [theme.breakpoints.down('sm')]: {
@@ -36,10 +40,13 @@ const TextLeft = styled('div')(({ theme }) => ({
   },
   '& > h1': {
     marginTop: 0,
-    fontSize: '2.5rem',
+    fontSize: '3rem',
     marginBottom: '0.5rem',
     // fontWeight: 500,
     lineHeight: 1.2,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '2rem',
+    },
   },
   [theme.breakpoints.down('sm')]: {
     width: 'inherit',
@@ -50,12 +57,52 @@ const Line = styled('div')(({ theme }) => ({
   display: 'inline-block',
   height: '6px',
   width: '100px',
-  background: 'firebrick',
+  background: theme.palette.primary.light,
 }));
 const OfferContainer = styled('div')(({ theme }) => ({
   display: 'flex',
-  gap: '2px',
-  flexWrap: 'wrap',
+  gap: '10px',
+  // flexWrap: 'wrap',
+  [theme.breakpoints.down('sm')]: {
+    // fontSize: '20px',
+    gap: '10px',
+    flexWrap: 'wrap',
+  },
+}));
+const PriceContainer = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start',
+  '& .cardButton': {
+    background: theme.palette.secondary.main,
+    color: theme.palette.primary.contrastText,
+    borderRadius: '15px 0 15px 0',
+  },
+}));
+const Price = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start',
+  '& > h2': {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '20px',
+    },
+  },
+  '& > span': {
+    fontSize: '13px',
+    margin: '3px 0px',
+  },
+}));
+const StarIconContainer = styled('div')(({ theme }) => ({
+  '& .star-icon': {
+    fontSize: '22px',
+    color: '#fdbd0c',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '16px',
+    },
+  },
 }));
 
 const OfferInfo = styled('div')(({ theme }) => ({
@@ -67,6 +114,12 @@ const OfferInfo = styled('div')(({ theme }) => ({
   width: '125px',
   textAlign: 'center',
   margin: '20px 0px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  [theme.breakpoints.down('sm')]: {
+    margin: '0px',
+  },
 }));
 
 const ImageContainer = styled('div')(({ theme }) => ({
@@ -95,15 +148,44 @@ const Card = ({ hotel }) => {
         <Box display={'flex'}>
           <TextLeft>
             <h1 className="text-black">{hotel.name}</h1>
+            <Line></Line>
             <span>
               {hotel.location.city},{hotel.location.country}
             </span>
-            <Line></Line>
+            <StarIconContainer>
+              <Stack spacing={1}>
+                <Rating
+                  name="half-rating-read"
+                  defaultValue={hotel.rating.value}
+                  precision={0.5}
+                  readOnly
+                />
+              </Stack>
+            </StarIconContainer>
             <OfferContainer display={'flex'}>
               {hotel.inclusions.map((offer, index) => (
                 <OfferInfo key={index}>{offer}</OfferInfo>
               ))}
             </OfferContainer>
+
+            <PriceContainer>
+              <Price>
+                <span>{`Sleeps: ${hotel.sleep}`}</span>
+                <span>
+                  {hotel.price.stay.adults} Adult,
+                  {` ${hotel.price.stay.children} Children`}
+                  {` ${hotel.price.stay.infants} Infants`}
+                </span>
+                <h2>
+                  {hotel.price.total.currency} {hotel.price.total.amount}
+                </h2>
+              </Price>
+              <Button
+                text={'Check Availability'}
+                className={'cardButton'}
+                icon={NavigateNextOutlined}
+              />
+            </PriceContainer>
           </TextLeft>
         </Box>
       </Col>

@@ -1,0 +1,6 @@
+export const FILTER_CONSTANTS = {
+  ASC: 'ASC',
+  DESC: 'DESC',
+  ASCSTAR: 'ASCSTAR',
+  DESCSTAR: 'DESCSTAR',
+};

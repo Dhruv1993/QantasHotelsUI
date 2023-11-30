@@ -1,12 +1,10 @@
-import {
-  ExpandLessOutlined,
-  ExpandMoreOutlined,
-  LocationOnOutlined,
-  PersonOutlineOutlined,
-  SortSharp,
-} from '@mui/icons-material';
+import { LocationOnOutlined, PersonOutlineOutlined } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { FILTER_CONSTANTS } from '../../Constants/constants';
 
 const Container = styled('div')(({ theme }) => ({
   backgroundImage: 'linear-gradient(120deg, #2874f0 20%, #1958b2)',
@@ -25,16 +23,6 @@ const Container = styled('div')(({ theme }) => ({
     marginBottom: '10px',
   },
 }));
-
-// const Form = styled('form')(() => ({
-//   display: 'flex',
-//   flexDirection: 'column',
-//   '& .search-icon': {
-//     marginRight: '3px',
-//     fontSize: '25px',
-//     height: '100%',
-//   },
-// }));
 
 const LocationContainer = styled('div')(() => ({
   color: '#424d5f',
@@ -165,7 +153,6 @@ const Quantity = styled('span')(({ theme }) => ({
 const Button = styled('button')(() => ({
   backgroundColor: '#003580',
   margin: '25px auto 10px',
-  border: '1px solid #003580',
   width: '145px',
   padding: '9.5px',
   borderRadius: '3px',
@@ -175,85 +162,54 @@ const Button = styled('button')(() => ({
   transition: 'all 0.1s ease-in',
 }));
 
-const SortFilterContainer = styled('div')(() => ({
-  position: 'relative',
-}));
-const SortFilterButton = styled('button')(({ theme }) => ({
+const SortFilterContainer = styled('div')(({ theme }) => ({
   display: 'flex',
-  width: '100%',
-  alignItems: 'center',
-  justifyContent: 'flex-start',
-  backgroundColor: theme.palette.background.paper,
-  border: '1px solid #0083cc',
-  color: theme.palette.text.secondary,
-  // fontSize: '15px',
-  fontWeight: 500,
-  cursor: 'pointer',
-  '&:active': {
-    boxShadow: '0 2px #666',
-    transform: 'translateY(1px)',
+
+  '& .MuiFormControl-root': {
+    width: '100%',
+    background: theme.palette.background.default,
+    borderRadius: '5px',
+    border: 'none',
+    '& .MuiSelect-select': {},
   },
 }));
-
-const IconContainer = styled('div')(() => ({
+const ButtonContainer = styled('div')(() => ({
   display: 'flex',
-  flexDirection: 'column',
-  marginLeft: '10px',
-  '&.expand-icon': {
-    /* border: 1px solid black; */
-    fontSize: '16px',
-    marginTop: '-10px',
-  },
-}));
-const OptionsListContainer = styled('div')(() => ({
-  boxShadow: '0px 0px 3px -2px black',
-  border: '1px solid #cbcbcb',
-  borderRadius: ' 3px',
-  backgroundColor: 'white',
-  padding: '10px 0px',
-  position: 'absolute',
-  top: '43px',
-  left: '0px',
-  zIndex: 1,
-
-  '& > ul': {
-    listStyleType: 'none',
-    '& li': {
-      '& > option': {
-        fontSize: '15px',
-        color: '#4c4747',
-        padding: '10px 25px',
-        cursor: 'pointer',
-
-        '&:hover': {
-          backgroundColor: '#efefef',
-        },
-      },
-    },
-  },
 }));
 
-const FilterControl = () => {
+const FilterControl = ({ setfilterOptions, defaultFilterOptions }) => {
   const [openOptions, setOpenOptions] = useState(false);
-  const [options, setOptions] = useState({
-    adult: 2,
-  });
-  const [openList, setOpenList] = useState(false);
-  const [sortBy, setSortBy] = useState('Lowest price');
+  const [options, setOptions] = useState(defaultFilterOptions.people);
+  const [sortBy, setSortBy] = useState(defaultFilterOptions.sortBy);
+  const [search, setSearch] = useState('');
 
-  const handleSortByAndOpenList = (e) => {
+  const handleSortBy = (e) => {
     setSortBy(e.target.value);
-    setOpenList(false);
   };
   const handleCount = (name, operation) => {
-    // console.log(options["room"], name, options[name]); // Accessing room key's value by Square Bracket method from "options" Object. We are using options[name] because here name variable is String that is "room". We can't use it like options.name bcoz it means options."room" which is undefined.
-
     setOptions((prev) => {
       return {
         ...prev,
         [name]: operation === 'inc' ? options[name] + 1 : options[name] - 1,
       };
     });
+  };
+
+  const onFilterClick = () => {
+    setfilterOptions({ people: options, sortBy, search });
+  };
+  const onFilterClear = () => {
+    // reset all the options
+    setOptions({
+      adult: 2,
+    });
+    setSortBy(FILTER_CONSTANTS.ASC);
+    setSearch('');
+    setfilterOptions(defaultFilterOptions);
+  };
+
+  const onChangeText = (e) => {
+    setSearch(e.target.value);
   };
 
   return (
@@ -267,9 +223,10 @@ const FilterControl = () => {
             <LocationOnOutlined className="search-icon" />
             <input
               type="text"
-              name="name"
-              id="name"
-              placeholder="Search hotels by name"
+              name="search"
+              placeholder="Search hotels by name,location and facilities"
+              onChange={onChangeText}
+              value={search}
             />
           </Wrapper>
         </LocationContainer>
@@ -313,45 +270,48 @@ const FilterControl = () => {
         </PersonContainer>
         <label htmlFor="sort">Sort:</label>
         <SortFilterContainer>
-          <SortFilterButton onClick={() => setOpenList(!openList)}>
-            <SortSharp className="search-icon" />
-            {sortBy}
-            <IconContainer>
-              <ExpandLessOutlined className="expand-icon" />
-              <ExpandMoreOutlined className="expand-icon" />
-            </IconContainer>
-          </SortFilterButton>
-          {openList === true && (
-            <OptionsListContainer>
-              <ul>
-                <li>
-                  <option onClick={handleSortByAndOpenList}>
-                    Lowest price
-                  </option>
-                </li>
-
-                <li>
-                  <option onClick={handleSortByAndOpenList}>
-                    Highest price
-                  </option>
-                </li>
-
-                <li>
-                  <option onClick={handleSortByAndOpenList}>
-                    Stars (highest first)
-                  </option>
-                </li>
-
-                <li>
-                  <option onClick={handleSortByAndOpenList}>
-                    Stars (lowest first)
-                  </option>
-                </li>
-              </ul>
-            </OptionsListContainer>
-          )}
+          <FormControl>
+            <Select
+              sx={{
+                boxShadow: 'none',
+                '.MuiOutlinedInput-notchedOutline': { border: 0 },
+                '&.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline':
+                  {
+                    border: 0,
+                  },
+                '&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline':
+                  {
+                    border: 0,
+                  },
+              }}
+              value={sortBy}
+              onChange={handleSortBy}
+              displayEmpty
+            >
+              <MenuItem value={FILTER_CONSTANTS.ASC}>
+                Price: Low to high
+              </MenuItem>
+              <MenuItem value={FILTER_CONSTANTS.DESC}>
+                Price: High to low
+              </MenuItem>
+              <MenuItem value={FILTER_CONSTANTS.ASCSTAR}>
+                Rating (Lowest first)
+              </MenuItem>
+              <MenuItem value={FILTER_CONSTANTS.DESCSTAR}>
+                Rating (Highest first)
+              </MenuItem>
+            </Select>
+          </FormControl>
         </SortFilterContainer>
-        <Button type="button">Search</Button>
+
+        <ButtonContainer>
+          <Button type="button" onClick={onFilterClick}>
+            Search
+          </Button>
+          <Button type="button" onClick={onFilterClear}>
+            Clear
+          </Button>
+        </ButtonContainer>
       </>
     </Container>
   );

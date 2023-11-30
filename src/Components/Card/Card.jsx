@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
-import { NavigateNextOutlined, Star } from '@mui/icons-material';
+import { NavigateNextOutlined } from '@mui/icons-material';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import { Button } from '../Button/Button';
@@ -32,7 +32,7 @@ const TextLeft = styled('div')(({ theme }) => ({
   background: 'white',
   opacity: 0.7,
   zIndex: 10,
-  height: '450px',
+  height: '550px',
   display: 'flex',
   flexDirection: 'column',
   [theme.breakpoints.down('sm')]: {

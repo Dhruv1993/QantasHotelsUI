@@ -176,197 +176,67 @@ const Footer = () => {
           </SocialMediaInfo>
         </AboutMe>
 
-        <ImportantLinks>
-          <ul>
-            <li>
-              <Link to="/hotels" className="link">
-                Hotels
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Resorts
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Apartments
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Cities
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Countries
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Airports
-              </Link>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <Link to="/hotels" className="link">
-                Hotels
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Resorts
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Apartments
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Cities
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Countries
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Airports
-              </Link>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <Link to="/hotels" className="link">
-                Hotels
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Resorts
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Apartments
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Cities
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Countries
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Airports
-              </Link>
-            </li>
-          </ul>
-        </ImportantLinks>
         <ImportantLinks id="hide-footer-links">
           <ul>
             <li>
-              <Link to="/hotels" className="link">
+              <Link to="/" className="link">
                 Hotels
               </Link>
             </li>
             <li>
-              <Link to="/hotels" className="link">
+              <Link to="/" className="link">
                 Resorts
               </Link>
             </li>
             <li>
-              <Link to="/hotels" className="link">
+              <Link to="/" className="link">
                 Apartments
               </Link>
             </li>
             <li>
-              <Link to="/hotels" className="link">
+              <Link to="/" className="link">
                 Cities
               </Link>
             </li>
             <li>
-              <Link to="/hotels" className="link">
+              <Link to="/" className="link">
                 Countries
               </Link>
             </li>
             <li>
-              <Link to="/hotels" className="link">
+              <Link to="/" className="link">
                 Airports
               </Link>
             </li>
           </ul>
           <ul>
             <li>
-              <Link to="/hotels" className="link">
+              <Link to="/" className="link">
                 Hotels
               </Link>
             </li>
             <li>
-              <Link to="/hotels" className="link">
+              <Link to="/" className="link">
                 Resorts
               </Link>
             </li>
             <li>
-              <Link to="/hotels" className="link">
+              <Link to="/" className="link">
                 Apartments
               </Link>
             </li>
             <li>
-              <Link to="/hotels" className="link">
+              <Link to="/" className="link">
                 Cities
               </Link>
             </li>
             <li>
-              <Link to="/hotels" className="link">
+              <Link to="/" className="link">
                 Countries
               </Link>
             </li>
             <li>
-              <Link to="/hotels" className="link">
-                Airports
-              </Link>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <Link to="/hotels" className="link">
-                Hotels
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Resorts
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Apartments
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Cities
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
-                Countries
-              </Link>
-            </li>
-            <li>
-              <Link to="/hotels" className="link">
+              <Link to="/" className="link">
                 Airports
               </Link>
             </li>

@@ -1,9 +1,12 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import { Box } from '@mui/material';
-import { NavigateNextOutlined } from '@mui/icons-material';
-import Rating from '@mui/material/Rating';
-import Stack from '@mui/material/Stack';
+import { Box, Rating, Stack } from '@mui/material';
+import {
+  ArrowBackIos,
+  ArrowForwardIos,
+  Close,
+  NavigateNextOutlined,
+} from '@mui/icons-material';
 import { Button } from '../Button/Button';
 
 const Col = styled('div')(({ theme }) => ({
@@ -125,6 +128,7 @@ const OfferInfo = styled('div')(({ theme }) => ({
 
 const ImageContainer = styled('div')(({ theme }) => ({
   '& .img-right': {
+    cursor: 'pointer',
     '& > img': {
       position: 'absolute',
       top: '2vmin',
@@ -142,7 +146,107 @@ const ImageContainer = styled('div')(({ theme }) => ({
     },
   },
 }));
-const Card = ({ hotel }) => {
+
+// CSS For Slider
+
+const Slider = styled('div')(() => ({
+  backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  position: 'fixed',
+  top: '0px',
+  left: '0px',
+  zIndex: 9999,
+  width: '100vw',
+  height: '100vh',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const Slides = styled('div')(({ theme }) => ({
+  boxShadow: '0px 0px 15px 12px rgb(0 0 0 / 45%)',
+  width: '82%',
+  height: '85vh',
+  position: 'relative',
+  [theme.breakpoints.down('sm')]: {
+    width: '99vw',
+    height: '99vh',
+  },
+  [theme.breakpoints.down('xs')]: {
+    width: '97vw',
+  },
+  '& > img': {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+
+  '& .arrow-icon': {
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    color: 'white',
+    fontSize: '40px',
+    cursor: 'pointer',
+
+    '&:hover': {
+      color: '#2874f0',
+    },
+  },
+  '& .left': {
+    left: '-60px',
+
+    [theme.breakpoints.down('sm')]: {
+      left: '20px',
+    },
+  },
+
+  '& .right': {
+    right: '-60px',
+
+    [theme.breakpoints.down('sm')]: {
+      right: '20px',
+    },
+  },
+  '& .close-icon': {
+    boxShadow: '0px 0px 5px 4px rgb(0 0 0 / 25%)',
+    backgroundColor: 'white',
+    borderRadius: '50%',
+    position: 'absolute',
+    top: '-25px',
+    right: '-25px',
+    fontSize: '40px',
+    padding: '5px',
+    cursor: 'pointer',
+
+    [theme.breakpoints.down('sm')]: {
+      top: '10px',
+      left: '50%',
+      transform: 'translateX(-50%)',
+    },
+
+    '&:hover': {
+      backgroundColor: '#2874f0',
+      color: 'white',
+    },
+  },
+}));
+
+const Card = ({ hotel, extraImages }) => {
+  const [openSlider, setOpenSlider] = React.useState(false);
+  const [slideNumber, setSlideNumber] = React.useState(0);
+
+  const openImageSlider = (index) => {
+    setSlideNumber(index);
+    setOpenSlider(true);
+  };
+
+  const handleSlide = (direction) => {
+    if (direction === 'right') {
+      setSlideNumber(slideNumber === 0 ? 7 : slideNumber - 1);
+    } else {
+      setSlideNumber(slideNumber === 7 ? 0 : slideNumber + 1);
+    }
+  };
   return (
     <>
       <Col>
@@ -183,9 +287,10 @@ const Card = ({ hotel }) => {
                 </h2>
               </Price>
               <Button
-                text={'Check Availability'}
+                text={'Checkout more pictures'}
                 className={'cardButton'}
                 icon={NavigateNextOutlined}
+                onClick={() => openImageSlider(0)}
               />
             </PriceContainer>
           </TextLeft>
@@ -195,10 +300,34 @@ const Card = ({ hotel }) => {
       <Col>
         <ImageContainer>
           <div className="img-right">
-            <img src={hotel.heroImage} alt="bike" />
+            <img
+              src={hotel.heroImage}
+              alt="bike"
+              onClick={() => openImageSlider(0)}
+            />
           </div>
         </ImageContainer>
       </Col>
+      {openSlider && (
+        <Slider>
+          <Slides>
+            <ArrowBackIos
+              className="arrow-icon left"
+              onClick={() => handleSlide('left')}
+            />
+            <ArrowForwardIos
+              className="arrow-icon right"
+              onClick={() => handleSlide('right')}
+            />
+            <Close
+              className="close-icon"
+              onClick={() => setOpenSlider(false)}
+            />
+
+            <img src={extraImages[slideNumber]} alt="hotel" />
+          </Slides>
+        </Slider>
+      )}
     </>
   );
 };

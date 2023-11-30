@@ -30,3 +30,14 @@ export const featuredCountryData = [
     desc: 'France is known all around the world for Paris and its monuments such as the Tower',
   },
 ];
+
+export const extraImages = [
+  '/images/hotels/hotel2.webp',
+  '/images/hotels/common1.jpg',
+  '/images/hotels/common2.jpg',
+  '/images/hotels/common3.jpg',
+  '/images/hotels/common4.jpg',
+  '/images/hotels/common5.jpg',
+  '/images/hotels/common6.jpg',
+  '/images/hotels/common7.jpg',
+];

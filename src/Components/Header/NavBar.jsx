@@ -269,40 +269,29 @@ const NavBar = () => {
       </NavContainer>
       <SecondNavContainer openMenu={openMenu}>
         <ul>
-          <Link to="/hotels" className="link">
+          <Link to="/" className="link">
             <li className="active">
               <BedOutlined className="li-icon" />
               Stays
             </li>
           </Link>
-          <Link to="/hotels" className="link">
+          <Link to="/" className="link">
             <li>
               <ConnectingAirportsOutlined className="li-icon" />
               Flights
             </li>
           </Link>
-          <Link to="/hotels" className="link">
+          <Link to="/" className="link">
             <li>
               <HotelOutlined className="li-icon" />
               Hotels
             </li>
           </Link>
-          <Link to="/hotel/5" className="link">
-            <li>
-              <DirectionsCarOutlined className="li-icon" />
-              Car Rentals
-            </li>
-          </Link>
-          <Link to="/hotels" className="link">
+
+          <Link to="/" className="link">
             <li>
               <AttractionsOutlined className="li-icon" />
               Attractions
-            </li>
-          </Link>
-          <Link to="/hotel/4" className="link">
-            <li>
-              <AirportShuttleOutlined className="li-icon" />
-              Airport Taxis
             </li>
           </Link>
         </ul>
@@ -310,7 +299,7 @@ const NavBar = () => {
         <h3>Hello, HR</h3>
 
         <ul className="hidden-ul">
-          <Link to="/hotels" className="link">
+          <Link to="/" className="link">
             <li>
               <SearchOutlined className="li-icon" />
               Search Hotels
@@ -328,7 +317,7 @@ const NavBar = () => {
               Currency Exchange
             </li>
           </Link>
-          <Link to="/hotels" className="link">
+          <Link to="/" className="link">
             <li>
               <TranslateOutlined className="li-icon" />
               Language
@@ -343,22 +332,16 @@ const NavBar = () => {
         </ul>
 
         <ul className="hidden-ul">
-          <Link to="/register" className="link">
+          <Link to="/" className="link">
             <li>
               <HowToRegOutlined className="li-icon" />
               Register
             </li>
           </Link>
-          <Link to="/login" className="link">
+          <Link to="/" className="link">
             <li>
               <LoginOutlined className="li-icon" />
               Login
-            </li>
-          </Link>
-          <Link to="/hotel/4" className="link">
-            <li>
-              <LogoutOutlined className="li-icon" />
-              Logout
             </li>
           </Link>
         </ul>

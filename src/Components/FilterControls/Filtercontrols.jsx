@@ -218,7 +218,7 @@ const FilterControl = ({ setfilterOptions, defaultFilterOptions }) => {
       <h2>Filters</h2>
       <>
         <LocationContainer>
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="name">Search:</label>
           <Wrapper>
             <LocationOnOutlined className="search-icon" />
             <input
@@ -306,7 +306,7 @@ const FilterControl = ({ setfilterOptions, defaultFilterOptions }) => {
 
         <ButtonContainer>
           <Button type="button" onClick={onFilterClick}>
-            Search
+            Go
           </Button>
           <Button type="button" onClick={onFilterClear}>
             Clear

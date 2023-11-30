@@ -10,6 +10,16 @@ import FilterControl from './Components/FilterControls/Filtercontrols';
 import { API } from './Services/Api';
 import Card from './Components/Card/Card';
 import FeaturedCountries from './Components/FeaturedCountries/FeaturedCountries';
+import { FILTER_CONSTANTS } from './Constants/constants';
+import {
+  sortByLow,
+  isEmpty,
+  sortByHigh,
+  filterByNumerOfAdults,
+  sortAscByNumerOfStars,
+  sortDescByNumerOfStars,
+  filterByText,
+} from './helpers';
 
 const Container = styled('div')(({ theme }) => ({
   margin: '20px 120px',
@@ -77,17 +87,29 @@ const Main = styled('div')(({ theme }) => ({
     flexWrap: 'wrap',
   },
 }));
-
+const defaultFilterOptions = {
+  people: {
+    adult: 2,
+  },
+  sortBy: FILTER_CONSTANTS.ASC,
+  search: '',
+};
 function App() {
   const [theme, colorMode] = useMode();
   const [data, setData] = React.useState([]);
+
+  const [filterOptions, setfilterOptions] =
+    React.useState(defaultFilterOptions);
+
+  //---------used for pagination--------------------------
   const [currentPage, setCurrentPage] = React.useState(1);
   const recordsPerPage = 5;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
   const records = data.slice(firstIndex, lastIndex);
-  const nPage = Math.ceil(data.length / recordsPerPage);
 
+  const nPage = Math.ceil(data.length / recordsPerPage);
+  //----------------
   React.useEffect(() => {
     // The AbortController interface represents a controller object that allows you to abort one or
     // more Web requests as and when desired.
@@ -97,7 +119,9 @@ function App() {
         // make api call here to get the list of hotels
         const signal = controller.signal;
         const { hotels: data } = await API.getHotels(signal);
-        setData(data);
+        // everytime filtering is set, it should make the api call and filter the data and set accordinly
+        const filteredData = filtersBasedOnOptions(data, filterOptions);
+        setData(filteredData);
       } catch (error) {
         console.error('error: ', error);
       }
@@ -106,7 +130,43 @@ function App() {
     return () => {
       controller.abort();
     };
-  }, []);
+  }, [filterOptions]);
+
+  const filtersBasedOnOptions = (data, filterOptions) => {
+    if (isEmpty(filterOptions)) {
+      // if no options are set then return the data from the api
+      return data;
+    }
+
+    let sortedHotels = [...data];
+    //search via text
+    if (filterOptions.search !== '') {
+      sortedHotels = filterByText(sortedHotels, filterOptions.search);
+    }
+    // filter people
+    if (filterOptions.people) {
+      sortedHotels = filterByNumerOfAdults(
+        sortedHotels,
+        filterOptions.people.adult
+      );
+    }
+    // sorting
+    if (filterOptions.sortBy === FILTER_CONSTANTS.ASC) {
+      sortedHotels = sortByLow(sortedHotels);
+    }
+
+    if (filterOptions.sortBy === FILTER_CONSTANTS.DESC) {
+      sortedHotels = sortByHigh(sortedHotels);
+    }
+    if (filterOptions.sortBy === FILTER_CONSTANTS.ASCSTAR) {
+      sortedHotels = sortAscByNumerOfStars(sortedHotels);
+    }
+    if (filterOptions.sortBy === FILTER_CONSTANTS.DESCSTAR) {
+      sortedHotels = sortDescByNumerOfStars(sortedHotels);
+    }
+
+    return sortedHotels;
+  };
 
   const paginationChanged = (_, page) => {
     setCurrentPage(page);
@@ -126,7 +186,10 @@ function App() {
                 <div id="sticky-container">
                   <div id="hide-search-box">
                     {/* filter controls */}
-                    <FilterControl />
+                    <FilterControl
+                      setfilterOptions={setfilterOptions}
+                      defaultFilterOptions={defaultFilterOptions}
+                    />
                   </div>
                 </div>
               </SideContainer>

@@ -15,7 +15,7 @@ const Col = styled('div')(({ theme }) => ({
     width: '50%',
     float: 'left',
   },
-  '&:first-child': {
+  '&:first-of-type': {
     [theme.breakpoints.down('sm')]: {
       order: 1,
     },
@@ -36,6 +36,7 @@ const TextLeft = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   [theme.breakpoints.down('sm')]: {
+    height: '250px',
     order: 1,
   },
   '& > h1': {
@@ -156,7 +157,8 @@ const Card = ({ hotel }) => {
               <Stack spacing={1}>
                 <Rating
                   name="half-rating-read"
-                  defaultValue={hotel.rating.value}
+                  max={5}
+                  value={hotel.rating.value}
                   precision={0.5}
                   readOnly
                 />
@@ -172,7 +174,7 @@ const Card = ({ hotel }) => {
               <Price>
                 <span>{`Sleeps: ${hotel.sleep}`}</span>
                 <span>
-                  {hotel.price.stay.adults} Adult,
+                  {hotel.price.stay.adults} Adults,
                   {` ${hotel.price.stay.children} Children`}
                   {` ${hotel.price.stay.infants} Infants`}
                 </span>

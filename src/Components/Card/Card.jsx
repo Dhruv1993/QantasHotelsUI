@@ -287,7 +287,7 @@ const Card = ({ hotel, extraImages }) => {
                 </h2>
               </Price>
               <Button
-                text={'Checkout more pictures'}
+                text={'More photos'}
                 className={'cardButton'}
                 icon={NavigateNextOutlined}
                 onClick={() => openImageSlider(0)}

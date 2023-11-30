@@ -111,12 +111,13 @@ const Text = styled('div')(({ theme }) => ({
   backgroundColor: '#00000091',
   textShadow: '0px 0px 8px rgba(0, 0, 0, 1)',
   '& > h4': {
+    fontSize: '18px',
     [theme.breakpoints.down('md')]: {
       fontSize: '14px',
     },
   },
   '& > span': {
-    fontSize: '15px',
+    fontSize: '20px',
     color: '#efeded',
     fontWeight: '500',
 

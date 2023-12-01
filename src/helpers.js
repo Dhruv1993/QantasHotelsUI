@@ -24,7 +24,6 @@ export const filterByText = (sortArray = [], text) => {
       f.location.country.toLowerCase(),
     ];
     const inclusions = f.inclusions.map((m) => m.toLowerCase());
-    debugger;
     const checkForName = name.includes(text);
     const checkForLocations = locations.some((s) => s.includes(text));
     const checkForInclusions = inclusions.some((s) => s.includes(text));

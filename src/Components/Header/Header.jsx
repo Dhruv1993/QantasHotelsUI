@@ -4,7 +4,6 @@ import { HEADER_CSS } from '../../Constants/CssConstants';
 import NavBar from './NavBar';
 
 const Container = styled('div')(({ theme }) => ({
-  padding: theme.spacing(1),
   marginBottom: HEADER_CSS.mb,
   [theme.breakpoints.down('lg')]: {
     // down is matching screen widths less than or equal to set value

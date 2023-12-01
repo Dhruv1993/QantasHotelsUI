@@ -158,7 +158,7 @@ const Footer = () => {
 
           <SocialMediaInfo>
             <a
-              href="www.linkedin.com/in/dhruv-khullar"
+              href="https://www.linkedin.com/in/dhruv-khullar"
               title="LinkedIn Profile"
               target="_blank"
               rel="noreferrer"
@@ -166,7 +166,7 @@ const Footer = () => {
               <LinkedIn className="social-media-icon" />
             </a>
             <a
-              href="https://github.com/Dhruv1993"
+              href="https://www.github.com/Dhruv1993"
               title="GitHub Profile"
               target="_blank"
               rel="noreferrer"

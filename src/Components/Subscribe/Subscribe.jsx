@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import { Button } from '../Button/Button';
 
 const Container = styled('div')(({ theme }) => ({
   border: '1px solid #eaeaea',
@@ -156,12 +156,8 @@ const Subscribe = () => {
           <span>Simply Sign in or Register to get instant discounts.</span>
         </TextContainer>
         <BtnContainer>
-          <Link to="/login" className="link">
-            <button type="button">Login</button>
-          </Link>
-          <Link to="/register" className="link">
-            <button type="button">Register</button>
-          </Link>
+          <Button type="button" text={'Login'} />
+          <Button type="button" text={'Register'} />
         </BtnContainer>
       </BigBlueCircle>
 
